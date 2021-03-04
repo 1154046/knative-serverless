@@ -44,7 +44,7 @@ cd knative-serverless
 
 ## 3. Run the application
 
-Run `npm install` and `npm start` from both the `/src/destination` and `/src/ui` directories. In a browser, go to `localhost:3000` to interact with the UI and `localhost:4000` to interact with the destination service APIs in the swagger.
+Run `npm install` and `npm start` from the `/src/destination` directory. In a browser, go to `localhost:4000` to interact with the UI and the destination service APIs in the swagger.
 
 ## 4. Deploy to Knative
 
@@ -52,18 +52,16 @@ Run `npm install` and `npm start` from both the `/src/destination` and `/src/ui`
 > NOTE: This step can take about 30 minutes
 
 2. To allow changes to the Destinations Service or the UI, create a repo on [Docker Hub](https://hub.docker.com/) where the new modified containers will be pushed to.
-> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to `<DOCKERHUB_USERNAME>/destination:latest` in [destination-knative-service.yml](destination-knative-service.yml) and `<DOCKERHUB_USERNAME>/bee-ui:latest` in [ui-knative-service.yml](ui-knative-service.yml).
+> NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to `<DOCKERHUB_USERNAME>/destination:latest` in [destination-knative-service.yaml](destination-knative-service.yaml).
 
 ```bash
 export DOCKERHUB_USERNAME=<your-dockerhub-username>
 
 docker build -t $DOCKERHUB_USERNAME/destination:latest destination/
-docker build -t $DOCKERHUB_USERNAME/bee-ui:latest ui/
 
 docker login
 
 docker push $DOCKERHUB_USERNAME/destination:latest
-docker push $DOCKERHUB_USERNAME/bee-ui:latest
 ```
 
 3. From your newly created cluster dashboard, click on `Add-ons` and install `Managed Knative`
@@ -78,7 +76,7 @@ ibmcloud login --sso
 * Set the Kubernetes environment to work with your cluster:
 
 ```bash
-ibmcloud cs cluster-config $CLUSTER_NAME
+ibmcloud ks cluster config --cluster $CLUSTER_NAME
 ```
 
 The output of this command will contain a KUBECONFIG environment variable that must be exported in order to set the context. Copy and paste the output in the terminal window. An example is:
@@ -91,7 +89,6 @@ export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kub
 
 ```bash
 kubectl apply -f destination-knative-service.yml
-kubectl apply -f ui-knative-service.yml
 ```
 
 6. In a terminal window, run `kubectl get pods -w`. We will be watching the autoscaling feature of Knative serving. Initially, pods for both the destinations microservice and UI will be created. You can access the UI by going to `bee-kn-default.<INGRESS-SUBDOMAIN>`. After a few minutes with no activity, the pods will terminate and scale down to zero and you should see this in your terminal window. Once scaled down to zero, interact with the UI. You will notice that initially this will be very slow. This is because the containers are being created and scaling up to 1 pod each. Once created, if you interact with the UI again, you will notice that it runs smoothly. Here are some example logs of what to expect:
