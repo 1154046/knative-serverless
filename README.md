@@ -64,7 +64,7 @@ docker login
 docker push $DOCKERHUB_USERNAME/destination:latest
 ```
 
-3. From your newly created cluster dashboard, click on `Add-ons` and install `Managed Knative`
+3. From your newly created cluster dashboard, click on `Add-ons` and install `Cluster Autoscaler`
 
 4. Login to the IBM Cloud using the [Developer Tools CLI](https://www.ibm.com/cloud/cli):
 > NOTE use `--sso` if you have a single sign on account, or delete for username/password login
