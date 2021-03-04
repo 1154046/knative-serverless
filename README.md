@@ -55,7 +55,7 @@ Run `npm install` and `npm start` from the `/src/destination` directory. In a br
 > NOTE: If a new repo is used for the Docker containers, the container `image` will need to be modified to `<DOCKERHUB_USERNAME>/destination:latest` in [destination-knative-service.yaml](destination-knative-service.yaml).
 
 ```bash
-export DOCKERHUB_USERNAME=<your-dockerhub-username>
+export DOCKERHUB_USERNAME=<your-dockerhub-username> ( windows syntax: setx DOCKERHUB_USERNAME "<your-dockerhub-username>"  )
 
 docker build -t $DOCKERHUB_USERNAME/destination:latest destination/
 
