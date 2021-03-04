@@ -79,11 +79,6 @@ ibmcloud login --sso
 ibmcloud ks cluster config --cluster $CLUSTER_NAME
 ```
 
-The output of this command will contain a KUBECONFIG environment variable that must be exported in order to set the context. Copy and paste the output in the terminal window. An example is:
-
-```bash
-export KUBECONFIG=/home/rak/.bluemix/plugins/container-service/clusters/Kate/kube-config-prod-dal10-<cluster_name>.yml
-```
 
 5. To deploy the services to Knative, run:
 
