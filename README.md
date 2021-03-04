@@ -83,7 +83,7 @@ ibmcloud ks cluster config --cluster $CLUSTER_NAME
 5. To deploy the services to Knative, run:
 
 ```bash
-kubectl apply -f destination-knative-service.yml
+kubectl apply -f destination-knative-service.yaml
 ```
 
 6. In a terminal window, run `kubectl get pods -w`. We will be watching the autoscaling feature of Knative serving. Initially, pods for both the destinations microservice and UI will be created. You can access the UI by going to `bee-kn-default.<INGRESS-SUBDOMAIN>`. After a few minutes with no activity, the pods will terminate and scale down to zero and you should see this in your terminal window. Once scaled down to zero, interact with the UI. You will notice that initially this will be very slow. This is because the containers are being created and scaling up to 1 pod each. Once created, if you interact with the UI again, you will notice that it runs smoothly. Here are some example logs of what to expect:
