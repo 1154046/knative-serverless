@@ -80,7 +80,15 @@ ibmcloud ks cluster config --cluster $CLUSTER_NAME
 ```
 
 
-5. To deploy the services to Knative, run:
+
+5. To deploy the services to Knative using CLI: 
+```bash
+kubectl run $imagename --image=docker_image
+```
+
+
+
+5. Alternatively, To deploy the services to Knative, run:
 
 ```bash
 kubectl apply -f destination-knative-service.yaml
