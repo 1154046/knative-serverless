@@ -57,7 +57,7 @@ Run `npm install` and `npm start` from the `/src/destination` directory. In a br
 ```bash
 export DOCKERHUB_USERNAME=<your-dockerhub-username> ( windows syntax: setx DOCKERHUB_USERNAME "<your-dockerhub-username>"  )
 
-docker build -t $DOCKERHUB_USERNAME/destination:latest destination/
+docker build -t $DOCKERHUB_USERNAME/destination:latest .
 
 docker login
 
